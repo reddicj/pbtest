@@ -1,10 +1,10 @@
-import BuildHelper._
+import BuildHelper.*
 
-name := "pbtest"
+name         := "pbtest"
 organization := "pbtest"
 
-ThisBuild / scalaVersion := "3.2.2"
-ThisBuild / scalacOptions := Settings.compilerOptions
+ThisBuild / scalaVersion      := "3.2.2"
+ThisBuild / scalacOptions     := Settings.compilerOptions
 ThisBuild / semanticdbEnabled := true
 ThisBuild / semanticdbVersion := scalafixSemanticdb.revision
 ThisBuild / scalafixDependencies ++= List(
@@ -18,12 +18,8 @@ addCommandAlias("fix", "; scalafixAll; scalafmtSbt; scalafmtAll")
 addCommandAlias("check", "; scalafmtSbtCheck; scalafmtCheckAll; scalafixAll --check")
 
 lazy val root = (project in file("."))
-  .configs(IntegrationTest)
   .settings(
-    welcomeMessage,
     buildInfoSettings("pbtest"),
-    Defaults.itSettings,
-    Libs.dependencies,
-    inConfig(IntegrationTest)(scalafixConfigSettings(IntegrationTest))
+    Libs.dependencies
   )
   .enablePlugins(BuildInfoPlugin)
